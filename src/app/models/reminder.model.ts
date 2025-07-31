@@ -5,4 +5,6 @@ export interface Reminder {
   date: string;       // e.g., '2025-07-27'
   time: string;       // e.g., '08:30'
   repeat: 'once' | 'daily';
+  status: string;
+  notified?: boolean;
 }

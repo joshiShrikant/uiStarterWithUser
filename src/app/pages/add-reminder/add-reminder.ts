@@ -14,13 +14,13 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './add-reminder.css'
 })
 export class AddReminder implements OnChanges {
-  @Input() reminder: Reminder = { id: '', title: '', date: '', time: '', repeat: 'once' };
+  @Input() reminder: Reminder = { id: '', title: '', date: '', time: '', repeat: 'once', status: 'active', notified: false };
   @Output() save = new EventEmitter<Reminder>();
 
   editMode = false;
   reminders: Reminder[] = [];
 
-  formReminder: Reminder = { id: '', title: '', date: '', time: '', repeat: 'once' };
+  formReminder: Reminder = { id: '', title: '', date: '', time: '', repeat: 'once', status: 'active', notified: false };
 
   constructor(private reminderService: ReminderService,
     private route: ActivatedRoute,
@@ -102,7 +102,7 @@ submitForm() {
    
     this.save.emit(this.formReminder);
     this.router.navigate(['/viewReminders']);
-    this.formReminder = { id: '', title: '', date: '', time: '', repeat: 'once' }; // reset form
+    this.formReminder = { id: '', title: '', date: '', time: '', repeat: 'once', status: 'active', notified: false}; // reset form
 
   // if (this.editMode) {
   //   this.http.put(`http://localhost:8080/api/reminders/${this.formReminder.id}`, reminderPayload)
@@ -119,7 +119,7 @@ submitForm() {
 
 
    resetForm() {
-    this.formReminder = { id: '', title: '', description: '', date: '', time: '', repeat: 'once' };
+    this.formReminder = { id: '', title: '', description: '', date: '', time: '', repeat: 'once', status: 'active', notified: false };
     this.editMode = false;
     this.router.navigate([], { queryParams: {} });
   }

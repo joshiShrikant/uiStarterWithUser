@@ -57,3 +57,14 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+
+
+# how to run this app?
+
+you need to do following commands to run this app locally.
+
+1. npm i
+2. ng s
+3. ng build --base-href "https://joshishrikant.github.io/reminderappPublish/" (do it 2 time)
+4. npx angular-cli-ghpages --dir=dist/my-app/browser

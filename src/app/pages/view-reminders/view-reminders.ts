@@ -10,6 +10,19 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { HttpClient } from '@angular/common/http';
 
+// interface Reminder {
+//   id: number;
+//   title: string;
+//   description: string;
+//   date: string;
+//   time: string;
+//   repeat: string;
+//   status: string;
+//   notified?: boolean;
+// }
+
+
+
 @Component({
   selector: 'app-view-reminders',
   imports: [
@@ -23,7 +36,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ViewReminders implements OnInit, AfterViewInit{
 
-  selectedReminder: Reminder = { id: '', title: '', date: '', time: '', repeat: 'once' };
+  selectedReminder: Reminder = { id: '', title: '', date: '', time: '', repeat: 'once', status: '', notified: false };
   reminders: Reminder[] = [];
   dataSource = new MatTableDataSource<Reminder>();
   displayedColumns: string[] = ['title', 'description', 'date', 'time', 'repeat', 'actions'];
@@ -92,8 +105,35 @@ export class ViewReminders implements OnInit, AfterViewInit{
   //   });
   // }
 
+  checkReminders() {
+    const now = new Date();
+    const nowDateStr = now.toISOString().split('T')[0]; // yyyy-MM-dd
+    const nowTimeStr = now.getHours().toString().padStart(2, '0') + ':' +
+                       now.getMinutes().toString().padStart(2, '0'); // HH:mm
+
+    this.reminders.forEach(reminder => {
+      const reminderDate = reminder.date;
+      const reminderTime = reminder.time.substring(0, 5); // ensure HH:mm
+
+      // if (reminderDate === nowDateStr && reminderTime === nowTimeStr) {
+      //   alert(`Reminder: ${reminder.title}\n${reminder.description}`);
+      // }
+
+      if (reminderDate === nowDateStr && reminderTime === nowTimeStr && !reminder.notified) {
+          alert(`Reminder: ${reminder.title}`);
+          new Notification(`Reminder: ${reminder.title}`, { body: reminder.description });
+          reminder.notified = true;
+        }
+
+    });
+  }
+
     ngOnInit() {
     // this.loadReminders();
+    Notification.requestPermission();
+
+
+    setInterval(() => this.checkReminders(), 60000);
   }
 
 }
