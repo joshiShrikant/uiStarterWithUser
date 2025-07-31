@@ -1,0 +1,25 @@
+.home-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.home-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.home-image {
+  width: 300px;
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+
+.home-actions button {
+  margin: 0 10px;
+}

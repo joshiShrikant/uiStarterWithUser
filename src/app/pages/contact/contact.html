@@ -1,0 +1,28 @@
+<div class="contact-container">
+  <h1>Contact Us</h1>
+  <p>If you have questions, feedback, or need support, feel free to reach out using the form below or via email.</p>
+
+  <form (ngSubmit)="submitForm()" #contactForm="ngForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput name="name" [(ngModel)]="contact.name" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" name="email" [(ngModel)]="contact.email" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Message</mat-label>
+      <textarea matInput name="message" [(ngModel)]="contact.message" required></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!contactForm.valid">Send Message</button>
+  </form>
+
+  <p class="contact-email">
+    Or email us directly at:
+    <a href="mailto:joshishrikant812@gmail.com">joshishrikant812@gmail.com</a>
+  </p>
+</div>

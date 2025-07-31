@@ -1,0 +1,33 @@
+.sidenav-container {
+  height: 100vh;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.app-title {
+  margin-left: 10px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.main-content {
+  padding: 16px;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+a.active-link {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.active-link {
+  font-weight: bold;
+  text-decoration: underline;
+  color: yellow;
+}
+

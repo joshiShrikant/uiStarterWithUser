@@ -1,0 +1,42 @@
+.reminder-table th, .reminder-table td {
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .reminder-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+    .reminder-table td {
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+
+    .reminder-table-container {
+      width: 100%;
+      max-width: 50%;
+      margin: 20px auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .reminder-table {
+      width: 100%;
+    }
+    .filter-field {
+      width: 30%;
+      margin-bottom: 20px;
+      margin-inline-start: auto;
+    }
+    .reminder-table th, .reminder-table td {
+      padding: 8px 12px;
+      text-align: left;
+    }
+    .reminder-table th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+    .reminder-table td {
+      font-size: 0.95rem;
+      color: #333;
+    }

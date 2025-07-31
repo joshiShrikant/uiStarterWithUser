@@ -1,0 +1,38 @@
+ <form (ngSubmit)="submitForm()" class="form-container">
+      <mat-form-field appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput [(ngModel)]="formReminder.title" name="title" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput [(ngModel)]="formReminder.description" name="description" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date</mat-label>
+        <input matInput [matDatepicker]="datePicker" [(ngModel)]="formReminder.date" name="date" required />
+        <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+        <mat-datepicker #datePicker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Time</mat-label>
+        <input matInput [ngxMatTimepicker]="timePicker" [(ngModel)]="formReminder.time" name="time" required />
+        <ngx-mat-timepicker-toggle matSuffix [for]="timePicker"></ngx-mat-timepicker-toggle>
+        <ngx-mat-timepicker #timePicker></ngx-mat-timepicker>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill">
+        <mat-label>Repeat</mat-label>
+        <mat-select [(ngModel)]="formReminder.repeat" name="repeat">
+          <mat-option value="once">Once</mat-option>
+          <mat-option value="daily">Daily</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">
+        {{ formReminder.id ? 'Update Reminder' : 'Save Reminder' }}
+      </button>
+    </form>
