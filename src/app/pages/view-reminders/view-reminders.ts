@@ -37,21 +37,22 @@ export class ViewReminders implements OnInit, AfterViewInit{
     private router: Router,
     private http: HttpClient,
   ) {
-    // this.reminders = this.reminderService.getReminders();
-    // this.dataSource.data = this.reminders;
+    // Initialize reminders from the local storage
+    this.reminders = this.reminderService.getReminders();
+    this.dataSource.data = this.reminders;
   }
 
-  saveReminder(reminder: Reminder) {
-    const existingIndex = this.reminders.findIndex(r => r.id === reminder.id);
-    if (existingIndex !== -1) {
-      this.reminders[existingIndex] = reminder;
-    } else {
-      this.reminders.push(reminder);
-    }
-    this.reminderService.saveReminder(reminder);
-    this.reminders = this.reminderService.getReminders();
-    this.selectedReminder = { id: '', title: '', date: '', time: '', repeat: 'once' }; // reset form
-  }
+  // saveReminder(reminder: Reminder) {
+  //   const existingIndex = this.reminders.findIndex(r => r.id === reminder.id);
+  //   if (existingIndex !== -1) {
+  //     this.reminders[existingIndex] = reminder;
+  //   } else {
+  //     this.reminders.push(reminder);
+  //   }
+  //   this.reminderService.saveReminder(reminder);
+  //   this.reminders = this.reminderService.getReminders();
+  //   this.selectedReminder = { id: '', title: '', date: '', time: '', repeat: 'once' }; // reset form
+  // }
 
   editReminder(reminder: Reminder) {
     this.selectedReminder = { ...reminder };
@@ -59,16 +60,18 @@ export class ViewReminders implements OnInit, AfterViewInit{
 
   }
 
-  // deleteReminder(id: string) {
-  //   this.reminderService.deleteReminder(id);
-  //   this.reminders = this.reminderService.getReminders();
-  // }
-
-   deleteReminder(id: number) {
-    this.http.delete(`http://localhost:8080/api/reminders/${id}`).subscribe(() => {
-      this.loadReminders();
-    });
+    // delete local storage method
+  deleteReminder(id: string) {
+    this.reminderService.deleteReminder(id);
+    this.reminders = this.reminderService.getReminders();
   }
+
+  // delete service method
+  //  deleteReminder(id: number) {
+  //   this.http.delete(`http://localhost:8080/api/reminders/${id}`).subscribe(() => {
+  //     this.loadReminders();
+  //   });
+  // }
 
    ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -81,15 +84,16 @@ export class ViewReminders implements OnInit, AfterViewInit{
   }
 
 
-    loadReminders() {
-    this.http.get<Reminder[]>('http://localhost:8080/api/reminders').subscribe(data => {
-      this.reminders = data;
-      this.dataSource.data = this.reminders;
-    });
-  }
+  // loadReminders from the service
+  //   loadReminders() {
+  //   this.http.get<Reminder[]>('http://localhost:8080/api/reminders').subscribe(data => {
+  //     this.reminders = data;
+  //     this.dataSource.data = this.reminders;
+  //   });
+  // }
 
     ngOnInit() {
-    this.loadReminders();
+    // this.loadReminders();
   }
 
 }

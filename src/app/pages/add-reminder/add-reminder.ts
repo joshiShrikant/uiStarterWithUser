@@ -31,28 +31,28 @@ export class AddReminder implements OnChanges {
   }
   ngOnInit() {
     // Check if we are editing an existing reminder
-  // this.route.queryParams.subscribe(params => {
-  //     const id = params['id'];
-  //     if (id) {
-  //       const reminder1 = this.reminderService.getReminderById(id);
-  //       console.log(reminder1);
-        
-  //       const reminder = this.reminderService.getReminders().find(r => r.id === id);
-  //       if (reminder) {
-  //         this.formReminder = { ...reminder };
-  //       }
-  //     }
-  //   });
-
-     this.route.queryParams.subscribe(params => {
+  this.route.queryParams.subscribe(params => {
       const id = params['id'];
       if (id) {
-        this.http.get<Reminder>(`http://localhost:8080/api/reminders/${id}`).subscribe(reminder => {
-          this.formReminder = reminder;
-          this.editMode = true;
-        });
+        const reminder1 = this.reminderService.getReminderById(id);
+        console.log(reminder1);
+        
+        const reminder = this.reminderService.getReminders().find(r => r.id === id);
+        if (reminder) {
+          this.formReminder = { ...reminder };
+        }
       }
     });
+
+    //  this.route.queryParams.subscribe(params => {
+    //   const id = params['id'];
+    //   if (id) {
+    //     this.http.get<Reminder>(`http://localhost:8080/api/reminders/${id}`).subscribe(reminder => {
+    //       this.formReminder = reminder;
+    //       this.editMode = true;
+    //     });
+    //   }
+    // });
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -89,17 +89,32 @@ submitForm() {
     time: timeParts,
   };
 
-  if (this.editMode) {
-    this.http.put(`http://localhost:8080/api/reminders/${this.formReminder.id}`, reminderPayload)
-      .subscribe(() => {
-        this.resetForm();
-      });
-  } else {
-    this.http.post('http://localhost:8080/api/reminders', reminderPayload)
-      .subscribe(() => {
-        this.resetForm();
-      });
-  }
+   console.log(this.formReminder);
+    if (this.formReminder.id && this.formReminder.id !== '') {
+      // Update existing reminder
+      this.reminderService.updateReminder(this.formReminder);
+      console.log('Updated Reminder:', this.formReminder);
+      
+    } else {
+    this.formReminder.id = this.formReminder.id || Date.now().toString();
+      this.reminderService.saveReminder(this.formReminder);
+    }
+   
+    this.save.emit(this.formReminder);
+    this.router.navigate(['/viewReminders']);
+    this.formReminder = { id: '', title: '', date: '', time: '', repeat: 'once' }; // reset form
+
+  // if (this.editMode) {
+  //   this.http.put(`http://localhost:8080/api/reminders/${this.formReminder.id}`, reminderPayload)
+  //     .subscribe(() => {
+  //       this.resetForm();
+  //     });
+  // } else {
+  //   this.http.post('http://localhost:8080/api/reminders', reminderPayload)
+  //     .subscribe(() => {
+  //       this.resetForm();
+  //     });
+  // }
 }
 
 
