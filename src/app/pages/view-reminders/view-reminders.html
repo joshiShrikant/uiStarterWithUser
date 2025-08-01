@@ -58,3 +58,41 @@
 
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
+
+    <div>
+      <h3>Pending List:</h3>
+
+      <p> UI
+        RegisterComponent – Form to create account
+
+        LoginComponent – Form to login
+
+        ResetPasswordComponent – Form to reset password
+
+        AuthGuard – Protect routes (redirect to login if not logged in)
+      </p>
+
+      <p>
+                Backend API Endpoints
+
+Auth Endpoints:
+POST /api/auth/register – Register new user
+
+POST /api/auth/login – Authenticate and return JWT
+
+POST /api/auth/reset-password – Reset password (by token/email or user ID)
+
+
+      </p>
+      <p>
+        Spring Security Config:
+Permit /api/auth/**
+
+Secure /api/reminders/** with JWT
+
+Use JWT filter + AuthenticationManager
+
+      </p>
+      <p></p>
+
+    </div>

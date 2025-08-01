@@ -118,9 +118,12 @@ export class ViewReminders implements OnInit, AfterViewInit{
       // if (reminderDate === nowDateStr && reminderTime === nowTimeStr) {
       //   alert(`Reminder: ${reminder.title}\n${reminder.description}`);
       // }
+      console.log(`Checking reminder: ${reminder.title} on ${reminderDate} at ${reminderTime}`);
 
       if (reminderDate === nowDateStr && reminderTime === nowTimeStr && !reminder.notified) {
           alert(`Reminder: ${reminder.title}`);
+          console.log(`Reminder: ${reminder.title} at ${reminderTime} on ${reminderDate}`);
+          
           new Notification(`Reminder: ${reminder.title}`, { body: reminder.description });
           reminder.notified = true;
         }
@@ -133,7 +136,7 @@ export class ViewReminders implements OnInit, AfterViewInit{
     Notification.requestPermission();
 
 
-    setInterval(() => this.checkReminders(), 60000);
+    setInterval(() => this.checkReminders(), 1000);
   }
 
 }
