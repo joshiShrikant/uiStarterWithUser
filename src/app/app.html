@@ -8,11 +8,20 @@
       <span class="spacer"></span>
 
       <a mat-button routerLink="/" routerLinkActive="active-link">Home</a>
+      <ng-container *ngIf="!isLoggedIn">
       <a mat-button routerLink="/addReminder" routerLinkActive="active-link">Add Reminder</a>
       <a mat-button routerLink="/viewReminders" routerLinkActive="active-link">View Reminders</a>
       <!-- <a mat-button routerLink="/taskList" routerLinkActive="active-link">Task List</a> -->
       <a mat-button routerLink="/about" routerLinkActive="active-link">About</a>
       <a mat-button routerLink="/contact" routerLinkActive="active-link">Contact</a>
+      <a mat-button routerLink="/resetPassword" routerLinkActive="active-link">Reset Password</a>
+      <a mat-button routerLink="/profile" routerLinkActive="active-link">Profile</a>
+      <a mat-button routerLink="/logout" routerLinkActive="active-link">Logout</a>  
+    </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+      <a mat-button routerLink="/login" routerLinkActive="active-link">Login</a>
+      <a mat-button routerLink="/register" routerLinkActive="active-link">Register</a>
+      </ng-container>
 
     </mat-toolbar>
 

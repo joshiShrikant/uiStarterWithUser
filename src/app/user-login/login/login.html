@@ -17,4 +17,8 @@
 
         <p *ngIf="errorMessage" style="color:red; margin-top:10px">{{ errorMessage }}</p>
       </mat-card-content>
+      <mat-card-actions>
+        <a mat-button routerLink="/register">Register</a>
+        <a mat-button routerLink="/resetPassword" routerLinkActive="active-link">Forgot Password?</a>
+      </mat-card-actions>
     </mat-card>
