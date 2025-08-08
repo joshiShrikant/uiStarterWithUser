@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { MaterialModule } from '../../coreModules/material.module';
+import { AuthService } from '../../services/AuthService';
 
 @Component({
   selector: 'app-login',
@@ -22,17 +23,18 @@ export class Login {
   password = '';
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   login() {
     const credentials = { username: this.username, password: this.password };
-    this.http.post<{ token: string }>('http://localhost:8080/api/auth/login', credentials).subscribe({
-      next: res => {
-        localStorage.setItem('jwt', res.token);
-        this.router.navigate(['/']);  // Redirect to home/dashboard
+    this.authService.userLogin(credentials).subscribe({
+      next: response => {
+        this.authService.login(response.token); // Store token + update login state
+        this.router.navigate(['/']); // Redirect after login
+
       },
       error: err => {
-        this.errorMessage = 'Invalid username or password';
+        this.errorMessage = 'Invalid username or password from server';
       }
     });
   }

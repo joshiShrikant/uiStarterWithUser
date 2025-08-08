@@ -1,11 +1,66 @@
- <mat-card class="profile-card">
-      <mat-card-title>User Profile</mat-card-title>
-      <mat-card-content *ngIf="user">
-        <p><strong>Username:</strong> {{ user.username }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
-      </mat-card-content>
-      <mat-card-content *ngIf="!user">
-        <p>Loading user profile...</p>
-      </mat-card-content>
-    </mat-card>
+<mat-card class="profile-card">
+  <mat-card-title>User Profile</mat-card-title>
+  <mat-divider></mat-divider>
+
+  <div class="profile-section">
+    <img
+      *ngIf="user.profilePicture"
+      [src]="user.profilePicture"
+      alt="Profile Picture"
+      class="profile-img"
+    />
+
+    <div class="upload-controls">
+      <input
+        type="file"
+        id="fileInput"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+        hidden
+        #fileInput
+      />
+      <button mat-stroked-button color="primary" (click)="fileInput.click()">
+        Choose Picture
+      </button>
+      <button mat-raised-button color="accent" (click)="uploadPicture()" [disabled]="!selectedImage">
+        Upload Picture
+      </button>
+    </div>
+  </div>
+
+  <form [formGroup]="profileForm" (ngSubmit)="saveProfile()" class="profile-form">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" readonly />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>First Name</mat-label>
+      <input matInput formControlName="firstName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Last Name</mat-label>
+      <input matInput formControlName="lastName" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Phone Number</mat-label>
+      <input matInput formControlName="phoneNumber" type="tel" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Address</mat-label>
+      <input matInput formControlName="address" />
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</mat-card>

@@ -26,16 +26,17 @@ export class Register {
     const user = {
       username: this.username,
       email: this.email,
-      password: this.password
+      password: this.password,
+      role: 'user'  // Default role, can be modified based on your requirements
     };
 
-    this.http.post('http://localhost:8080/api/auth/register', user).subscribe({
+    this.http.post('http://localhost:8080/api/v1/auth/register', user).subscribe({
       next: () => {
         alert('Registration successful! Please login.');
         this.router.navigate(['/login']);
       },
       error: err => {
-        alert('Registration failed: ' + err.error.message);
+        alert('Registration failed: ' + err.message);
       }
     });
   }
