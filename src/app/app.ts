@@ -1,6 +1,5 @@
 import { Component, OnInit, signal, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TableList } from './shared/shared';
 import { SharedModule } from './shared/shared-module';
 import { MaterialModule } from './coreModules/material.module';
 import { MatSidenav } from '@angular/material/sidenav';

@@ -4,14 +4,12 @@
       <button mat-icon-button (click)="toggleSidenav()" aria-label="Menu">
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="app-title">My Reminder App</span>
+      <span class="app-title">My App</span>
       <span class="spacer"></span>
 
       <a mat-button routerLink="/" routerLinkActive="active-link">Home</a>
       <ng-container *ngIf="isLoggedIn">
-      <a mat-button routerLink="/addReminder" routerLinkActive="active-link">Add Reminder</a>
-      <a mat-button routerLink="/viewReminders" routerLinkActive="active-link">View Reminders</a>
-      <!-- <a mat-button routerLink="/taskList" routerLinkActive="active-link">Task List</a> -->
+     
       <a mat-button routerLink="/about" routerLinkActive="active-link">About</a>
       <a mat-button routerLink="/contact" routerLinkActive="active-link">Contact</a>
       <a mat-button routerLink="/resetPassword" routerLinkActive="active-link">Reset Password</a>
