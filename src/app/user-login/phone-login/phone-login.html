@@ -1,0 +1,10 @@
+<div>
+  <input [(ngModel)]="phoneNumber" placeholder="+91 9876543210">
+  <div id="recaptcha-container"></div>
+  <button (click)="sendCode()">Send OTP</button>
+
+  <div *ngIf="otpSent">
+    <input [(ngModel)]="otp" placeholder="Enter OTP">
+    <button (click)="verifyCode()">Verify</button>
+  </div>
+</div>

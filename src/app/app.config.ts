@@ -7,6 +7,9 @@ import { SharedModule } from './shared/shared-module';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     importProvidersFrom(MaterialModule, SharedModule, RouterModule),
+     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ]
 };
